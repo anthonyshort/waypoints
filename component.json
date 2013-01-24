@@ -10,7 +10,7 @@
     "component/bind": "*",
     "component/classes": "*",
     "anthonyshort/offset": "*",
-    "anthonyshort/throttle": "*"
+    "matthewmueller/throttle": "*"
   },
   "development": {},
   "license": "MIT",
