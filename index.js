@@ -10,8 +10,7 @@ var $ = require('jquery');
  */
 function Waypoints() {
   this.waypoints = [];
-  bind(this, this._onScroll);
-  this._onScroll = _.throttle(this._onScroll, 200);
+  this._onScroll = _.throttle(bind(this, this._onScroll), 200);
 }
 
 /**
@@ -20,23 +19,12 @@ function Waypoints() {
 Emitter(Waypoints.prototype);
 
 /**
- * Add a waypoint. This is an object with a y-offset, an element,
- * a class to add or remove and a delay.
- *
- * Example:
- * { 
- *    y: 0, 
- *    el: el,
- *    offset: 0,
- *    addClass: null,
- *    removeClass: null,
- *    delay: 0
- * }
- *  
- * @param {object} point
+ * Add a waypoint.
+ * @param {Number} point
+ * @param {Object} data Any data associated with this point
  */
-Waypoints.prototype.addPoint = function(point) {
-  this.points.push(point);
+Waypoints.prototype.addPoint = function(point, data) {
+  this.points.push({ y: point, data: data });
 };
 
 /**
@@ -62,11 +50,8 @@ Waypoints.prototype._onScroll = function() {
   var self = this;
 
   each(this.points, function(point){
-    if( (scrollPoint + wHeight) >= (point.y + point.offset) ) {
-      setTimeout(function(){
-        self.emit('point', point);
-        point.el.addClass(point.addClass).removeClass(point.removeClass);
-      }, point.delay);
+    if( (scrollPoint + wHeight) >= point.y ) {
+      self.emit('point', point.y, point.data);
     }
     else {
       newPoints.push(point);
@@ -97,17 +82,24 @@ Waypoints.prototype.stop = function() {
  */
 Waypoints.create = function(selector) {
   var waypoints = new Waypoints();
+
   $(selector).each(function(){
     var el = $(this);
-    waypoints.addPoint({ 
-      y: el.scrollTop(), 
+    var y = el.scrollTop() + (el.attr('data-scroll-offset') || 0);
+    waypoints.addPoint(y, { 
       el: el,
-      offset: el.attr('data-scroll-offset') || 0,
       addClass: el.attr('data-scroll-add-class') || null,
       removeClass: el.attr('data-scroll-remove-class') || null,
-      delay: Number(el.attr('data-scroll-class-delay')) || 0
+      delay: Number(data.attr('data-scroll-class-delay')) || 0
     });
   });
+
+  waypoints.on('point', function(point, data){
+    setTimeout(function(){
+      data.el.addClass(data.addClass).removeClass(data.removeClass);
+    }, data.delay);
+  });
+
   waypoints.start();
   return waypoints;
 };
