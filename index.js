@@ -1,7 +1,8 @@
 var Emitter = require('emitter');
 var each = require('each');
 var bind = require('bind');
-var $ = require('jquery');
+var offset = require('offset');
+var classes = require('classes');
 
 /**
  * Waypoints object takes points on the page and binds a scroll event
@@ -70,21 +71,21 @@ Waypoints.prototype.stop = function() {
  */
 Waypoints.create = function(selector) {
   var waypoints = new Waypoints();
+  var matched = document.querySelectorAll(selector);
 
-  $(selector).each(function(){
-    var el = $(this);
-    var y = el.scrollTop() + (el.attr('data-scroll-offset') || 0);
-    waypoints.addPoint(y, { 
+  each(matched, function(el){
+    var y = offset(el).top + (el.getAttribute('data-scroll-offset') || 0);
+    waypoints.addPoint(y, {
       el: el,
-      addClass: el.attr('data-scroll-add-class') || null,
-      removeClass: el.attr('data-scroll-remove-class') || null,
-      delay: Number(data.attr('data-scroll-class-delay')) || 0
+      addClass: el.getAttribute('data-scroll-add-class') || null,
+      removeClass: el.getAttribute('data-scroll-remove-class') || null,
+      delay: Number(data.getAttribute('data-scroll-class-delay')) || 0
     });
   });
 
   waypoints.on('point', function(point, data){
     setTimeout(function(){
-      data.el.addClass(data.addClass).removeClass(data.removeClass);
+      classes(data.el).add(data.addClass).remove(removeClass);
     }, data.delay);
   });
 
