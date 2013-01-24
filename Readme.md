@@ -1,4 +1,3 @@
-
 # Waypoints
 
   Fire methods when points on the page are scrolled to for the first time. Useful for triggering animation to elements while scrolling down the page.
@@ -15,19 +14,19 @@ Easiest way to use it is to use the create method. This assumes you want to add/
 
 Now place these data attributes on each of the elements
 
-`addClass`
+`data-scroll-addClass`
 
 A class to add to the element when it is reached
 
-`removeClass`
+`data-scroll-removeClass`
 
 A class to remove to the element when it is reached
 
-`delay`
+`data-scroll-delay`
 
 A delay, in milliseconds, for adding or removing the classes.
 
-`offset`
+`data-scroll-offset`
 
 Normally waypoints will use the scrollTop position of the element. You can adjust the point using this attribute to make it trigger earlier or later.
 
