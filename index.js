@@ -85,7 +85,7 @@ Waypoints.create = function(selector) {
 
   waypoints.on('point', function(point, data){
     setTimeout(function(){
-      classes(data.el).add(data.addClass).remove(removeClass);
+      classes(data.el).add(data.addClass).remove(data.removeClass);
     }, data.delay);
   });
 
