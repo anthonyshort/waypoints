@@ -3,6 +3,7 @@ var each = require('each');
 var bind = require('bind');
 var offset = require('offset');
 var classes = require('classes');
+var throttle = require('throttle');
 
 /**
  * Waypoints object takes points on the page and binds a scroll event
@@ -11,7 +12,7 @@ var classes = require('classes');
  */
 function Waypoints() {
   this.points = [];
-  this._onScroll = _.throttle(bind(this, this._onScroll), 200);
+  this._onScroll = throttle(bind(this, this._onScroll), 200);
 }
 
 /**
