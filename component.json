@@ -2,7 +2,7 @@
   "name": "waypoints",
   "repo": "anthonyshort/waypoints",
   "description": "Add and remove classes when scrolling to elements on a page",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "keywords": [],
   "dependencies": {
     "component/emitter": "*",

@@ -32,7 +32,6 @@ Waypoints.prototype.addPoint = function(point, data) {
  * will trigger when they are reached
  */
 Waypoints.prototype.start = function() {
-  if( this.points.length === 0 ) return;
   $(window).on('scroll', this._onScroll).trigger('scroll');
   this.emit('start');
 };
@@ -45,24 +44,13 @@ Waypoints.prototype.start = function() {
 Waypoints.prototype._onScroll = function() {
   var $window = $(window);
   var scrollPoint = $window.scrollTop();
-  var newPoints = [];
   var wHeight = $window.height();
   var self = this;
-
   each(this.points, function(point){
     if( (scrollPoint + wHeight) >= point.y ) {
       self.emit('point', point.y, point.data);
     }
-    else {
-      newPoints.push(point);
-    }
   });
-
-  this.points = newPoints;
-
-  if(this.points.length === 0 ) {
-    this.stop();
-  }
 };
 
 /**
