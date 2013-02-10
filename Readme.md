@@ -14,15 +14,15 @@ Easiest way to use it is to use the create method. This assumes you want to add/
 
 Now place these data attributes on each of the elements
 
-`data-scroll-addClass`
+`data-scroll-add-class`
 
 A class to add to the element when it is reached
 
-`data-scroll-removeClass`
+`data-scroll-remove-class`
 
 A class to remove to the element when it is reached
 
-`data-scroll-delay`
+`data-scroll-class-delay`
 
 A delay, in milliseconds, for adding or removing the classes.
 
