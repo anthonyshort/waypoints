@@ -34,7 +34,8 @@ Waypoints.prototype.addPoint = function(point, data) {
  * will trigger when they are reached
  */
 Waypoints.prototype.start = function() {
-  $(window).on('scroll', this._onScroll).trigger('scroll');
+  window.addEventListener('scroll', this._onScroll);
+  this._onScroll();
   this.emit('start');
 };
 
@@ -44,9 +45,8 @@ Waypoints.prototype.start = function() {
  * from the elment
  */
 Waypoints.prototype._onScroll = function() {
-  var $window = $(window);
-  var scrollPoint = $window.scrollTop();
-  var wHeight = $window.height();
+  var scrollPoint = window.scrollY;
+  var wHeight = window.innerHeight;
   var self = this;
   each(this.points, function(point){
     if( (scrollPoint + wHeight) >= point.y ) {
@@ -59,7 +59,7 @@ Waypoints.prototype._onScroll = function() {
  * Disable the waypoints by removing the scroll events
  */
 Waypoints.prototype.stop = function() {
-  $(window).off('scroll', this._onScroll);
+  window.removeEventListener('scroll', this._onScroll);
   this.emit('stop');
 };
 
@@ -71,22 +71,26 @@ Waypoints.prototype.stop = function() {
  * @return {Waypoints}
  */
 Waypoints.create = function(selector) {
+  if(!window.addEventListener) return;
+
   var waypoints = new Waypoints();
   var matched = document.querySelectorAll(selector);
 
   each(matched, function(el){
-    var y = offset(el).top + (el.getAttribute('data-scroll-offset') || 0);
+    var y = offset(el).top + Number(el.getAttribute('data-scroll-offset') || 0);
     waypoints.addPoint(y, {
       el: el,
       addClass: el.getAttribute('data-scroll-add-class') || null,
       removeClass: el.getAttribute('data-scroll-remove-class') || null,
-      delay: Number(data.getAttribute('data-scroll-class-delay')) || 0
+      delay: Number(el.getAttribute('data-scroll-class-delay')) || 0
     });
   });
 
   waypoints.on('point', function(point, data){
     setTimeout(function(){
-      classes(data.el).add(data.addClass).remove(data.removeClass);
+      var classList = classes(data.el);
+      if(data.addClass) classList.add(data.addClass);
+      if(data.removeClass) classList.remove(data.removeClass);
     }, data.delay);
   });
 
