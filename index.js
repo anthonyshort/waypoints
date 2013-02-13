@@ -84,12 +84,12 @@ Waypoints.create = function(options) {
   var matched = document.querySelectorAll(selector);
 
   each(matched, function(el){
-    var y = offset(el).top + Number(el.getAttribute('data-scroll-offset') || offset);
+    var y = offset(el).top + Number(el.getAttribute('data-waypoint-offset') || offset);
     waypoints.addPoint(y, {
       el: el,
-      addClass: el.getAttribute('data-scroll-add-class') || addClass,
-      removeClass: el.getAttribute('data-scroll-remove-class') || removeClass,
-      delay: Number(el.getAttribute('data-scroll-class-delay')) || delay
+      addClass: el.getAttribute('data-waypoint-addClass') || addClass,
+      removeClass: el.getAttribute('data-waypoint-removeClass') || removeClass,
+      delay: Number(el.getAttribute('data-waypoint-delay')) || delay
     });
   });
 

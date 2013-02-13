@@ -28,19 +28,19 @@ The selector to match to find waypoints. This element will be used as the point 
 
 #### `addClass`
 
-Default class to add when an element is reached. This can be overriden by each waypoint using the data attribute `data-scroll-addClass`. Defaults to `null`.
+Default class to add when an element is reached. This can be overriden by each waypoint using the data attribute `data-waypoint-addClass`. Defaults to `null`.
 
 #### `removeClass`
 
-Default class to add when an element is reached. This can be overriden by each waypoint using the data attribute `data-scroll-removeClass`. Defaults to `null`.
+Default class to add when an element is reached. This can be overriden by each waypoint using the data attribute `data-waypoint-removeClass`. Defaults to `null`.
 
 #### `delay`
 
-A delay, in milliseconds, for adding or removing the classes. Defaults to `0`. Can be overriden using `data-scroll-delay`.
+A delay, in milliseconds, for adding or removing the classes. Defaults to `0`. Can be overriden using `data-waypoint-delay`.
 
 #### `offset`
 
-Normally waypoints will use the scrollTop position of the element. You can adjust the point using this attribute to make it trigger earlier or later. This can be overriden using the data attribute `data-scroll-offset`. Defaults to `0`.
+Normally waypoints will use the scrollTop position of the element. You can adjust the point using this attribute to make it trigger earlier or later. This can be overriden using the data attribute `data-waypoint-offset`. Defaults to `0`.
 
 ## Standard API
 
