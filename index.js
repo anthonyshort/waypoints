@@ -78,13 +78,13 @@ Waypoints.create = function(options) {
   var addClass = options.addClass || null;
   var removeClass = options.removeClass || null;
   var delay = options.delay || 0;
-  var offset = options.offset || 0;
+  var pointOffset = options.offset || 0;
 
   var waypoints = new Waypoints();
   var matched = document.querySelectorAll(selector);
 
   each(matched, function(el){
-    var y = offset(el).top + Number(el.getAttribute('data-waypoint-offset') || offset);
+    var y = offset(el).top + Number(el.getAttribute('data-waypoint-offset') || pointOffset);
     waypoints.addPoint(y, {
       el: el,
       addClass: el.getAttribute('data-waypoint-addClass') || addClass,
