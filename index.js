@@ -70,19 +70,26 @@ Waypoints.prototype.stop = function() {
  * @param  {String} selector CSS selector to match elements on the page which will be used as Waypoints
  * @return {Waypoints}
  */
-Waypoints.create = function(selector) {
+Waypoints.create = function(options) {
   if(!window.addEventListener) return;
+
+  options = options || {};
+  var selector = options.selector || '.js-waypoint';
+  var addClass = options.addClass || null;
+  var removeClass = options.removeClass || null;
+  var delay = options.delay || 0;
+  var offset = options.offset || 0;
 
   var waypoints = new Waypoints();
   var matched = document.querySelectorAll(selector);
 
   each(matched, function(el){
-    var y = offset(el).top + Number(el.getAttribute('data-scroll-offset') || 0);
+    var y = offset(el).top + Number(el.getAttribute('data-scroll-offset') || offset);
     waypoints.addPoint(y, {
       el: el,
-      addClass: el.getAttribute('data-scroll-add-class') || null,
-      removeClass: el.getAttribute('data-scroll-remove-class') || null,
-      delay: Number(el.getAttribute('data-scroll-class-delay')) || 0
+      addClass: el.getAttribute('data-scroll-add-class') || addClass,
+      removeClass: el.getAttribute('data-scroll-remove-class') || removeClass,
+      delay: Number(el.getAttribute('data-scroll-class-delay')) || delay
     });
   });
 

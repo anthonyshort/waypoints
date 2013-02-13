@@ -10,25 +10,37 @@
 
 Easiest way to use it is to use the create method. This assumes you want to add/remove classes and uses data attributes on the elements. This is the main purpose for this component but you can also use the standard API to do something different.
 
-    Waypoints.create('.js-waypoint')
+    Waypoints.create({ 
+      selector: '.js-waypoint',
+      addClass: 'is-visible',
+      removeClass: 'is-hidden',
+      delay: 500,
+      offset: -200
+    });
 
-Now place these data attributes on each of the elements
+### Options
 
-`data-scroll-addClass`
+You pass through a set of options to `Waypoint.create` to set default properties for the waypoints which can be overriden by each waypoint using data attributes.
 
-A class to add to the element when it is reached
+#### `selector`
 
-`data-scroll-removeClass`
+The selector to match to find waypoints. This element will be used as the point to trigger the events. Defaults to `.js-waypoint`.
 
-A class to remove to the element when it is reached
+#### `addClass`
 
-`data-scroll-delay`
+Default class to add when an element is reached. This can be overriden by each waypoint using the data attribute `data-scroll-addClass`. Defaults to `null`.
 
-A delay, in milliseconds, for adding or removing the classes.
+#### `removeClass`
 
-`data-scroll-offset`
+Default class to add when an element is reached. This can be overriden by each waypoint using the data attribute `data-scroll-removeClass`. Defaults to `null`.
 
-Normally waypoints will use the scrollTop position of the element. You can adjust the point using this attribute to make it trigger earlier or later.
+#### `delay`
+
+A delay, in milliseconds, for adding or removing the classes. Defaults to `0`. Can be overriden using `data-scroll-delay`.
+
+#### `offset`
+
+Normally waypoints will use the scrollTop position of the element. You can adjust the point using this attribute to make it trigger earlier or later. This can be overriden using the data attribute `data-scroll-offset`. Defaults to `0`.
 
 ## Standard API
 
