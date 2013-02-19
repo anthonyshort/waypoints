@@ -4,10 +4,11 @@ var bind = require('bind');
 var offset = require('offset');
 var classes = require('classes');
 var throttle = require('throttle');
+var events = require('event');
 
 /**
  * Waypoints object takes points on the page and binds a scroll event
- * to the window. When these points are reached it will add or remove 
+ * to the window. When these points are reached it will add or remove
  * a class from the element
  */
 function Waypoints() {
@@ -34,7 +35,7 @@ Waypoints.prototype.addPoint = function(point, data) {
  * will trigger when they are reached
  */
 Waypoints.prototype.start = function() {
-  window.addEventListener('scroll', this._onScroll);
+  events.bind(window, 'scroll', this._onScroll);
   this._onScroll();
   this.emit('start');
 };
@@ -59,7 +60,7 @@ Waypoints.prototype._onScroll = function() {
  * Disable the waypoints by removing the scroll events
  */
 Waypoints.prototype.stop = function() {
-  window.removeEventListener('scroll', this._onScroll);
+  events.unbind(window, 'scroll', this._onScroll);
   this.emit('stop');
 };
 
@@ -71,8 +72,6 @@ Waypoints.prototype.stop = function() {
  * @return {Waypoints}
  */
 Waypoints.create = function(options) {
-  if(!window.addEventListener) return;
-
   options = options || {};
   var selector = options.selector || '.js-waypoint';
   var addClass = options.addClass || null;
