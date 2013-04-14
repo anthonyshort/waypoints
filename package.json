@@ -1,0 +1,30 @@
+{
+  "name": "waypoints",
+  "description": "Fire events when scrolling down the page",
+  "main": "index.js",
+  "version": "0.0.12",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/anthonyshort/waypoints.git"
+  },
+  "keywords": [
+    "browserify",
+    "browser",
+    "DOM",
+    "animation",
+    "effects",
+    "scroll",
+    "events"
+  ],
+  "author": "Anthony Short",
+  "license": "MIT",
+  "dependencies": {
+    "offset": "~0.0.1",
+    "each-component": "0.0.1",
+    "emitter-component": "~1.0.0",
+    "bind-component": "0.0.1",
+    "underscore": "~1.4.4",
+    "event-component": "~0.1.0",
+    "class-list": "~0.1.0"
+  }
+}

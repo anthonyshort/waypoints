@@ -1,10 +1,12 @@
-var Emitter = require('emitter');
-var each = require('each');
-var bind = require('bind');
+var Emitter = require('events').EventEmitter;
+var util = require('util');
 var offset = require('offset');
-var classes = require('classes');
-var throttle = require('throttle');
-var events = require('event');
+var classes = require('class-list');
+var _ = require('underscore');
+var each = _.each;
+var bind = _.bind;
+var throttle = _.throttle;
+var events = require('event-component');
 
 /**
  * Waypoints object takes points on the page and binds a scroll event
@@ -19,7 +21,7 @@ function Waypoints() {
 /**
  * Mixin an event emitter so we can emit and bind to events
  */
-Emitter(Waypoints.prototype);
+util.inherits(Waypoints, Emitter);
 
 /**
  * Add a waypoint.
