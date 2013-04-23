@@ -49,11 +49,16 @@ Waypoints.prototype._onScroll = function() {
   var scrollPoint = window.scrollY || window.pageYOffset;
   var wHeight = window.innerHeight;
   var self = this;
+  var newPoints = [];
   each(this.points, function(point){
     if( (scrollPoint + wHeight) >= point.y ) {
       self.emit('point', point.y, point.data);
     }
+    else {
+      newPoints.push(point);
+    }
   });
+  this.points = newPoints;
 };
 
 /**
