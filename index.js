@@ -50,14 +50,16 @@ Waypoints.prototype._onScroll = function() {
   var wHeight = window.innerHeight;
   var self = this;
   var newPoints = [];
-  each(this.points, function(point){
+
+  this.each(function(point){
     if( (scrollPoint + wHeight) >= point.y ) {
-      self.emit('point', point.y, point.data);
+      self.fire(point);
     }
     else {
       newPoints.push(point);
     }
   });
+  
   this.points = newPoints;
 };
 
@@ -67,6 +69,22 @@ Waypoints.prototype._onScroll = function() {
 Waypoints.prototype.stop = function() {
   events.unbind(window, 'scroll', this._onScroll);
   this.emit('stop');
+};
+
+Waypoints.prototype.each = function(callback) {
+  each(this.points, callback.bind(this));
+};
+
+Waypoints.prototype.fire = function(point) {
+  this.emit('point', point.y, point.data);
+  return this;
+};
+
+Waypoints.prototype.remove = function(point) {
+  this.points = this.points.filter(function(pointB){
+    return pointB !== point;
+  });
+  return this;
 };
 
 /**
