@@ -10,6 +10,7 @@
 
 Easiest way to use it is to use the create method. This assumes you want to add/remove classes and uses data attributes on the elements. This is the main purpose for this component but you can also use the standard API to do something different.
 
+<pre><code data-language="javascript">
     Waypoints.create({ 
       selector: '.js-waypoint',
       addClass: 'is-visible',
@@ -17,6 +18,7 @@ Easiest way to use it is to use the create method. This assumes you want to add/
       delay: 500,
       offset: -200
     });
+</code></pre>
 
 ### Options
 
